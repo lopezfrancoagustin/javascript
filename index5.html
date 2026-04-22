@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Clase de Matemática - Operaciones en Q</title>
+</head>
+<body>
+
+    <div id="contenido">
+        <h1>Propiedades de la potenciación y la radicación</h1>
+        <hr>
+
+        <div id="bloque-ejercicio">
+            <p id="explicacion"></p>
+            <p><strong>Pregunta:</strong></p>
+            <p id="enunciado"></p>
+            
+            <input type="text" id="respuesta-usuario" placeholder="Escribí acá">
+            <button onclick="comprobar()">Verificar</button>
+        </div>
+
+        <p id="mensaje-estado"></p>
+    </div>
+
+    <script>
+        // Lista completa con los textos de tu libro
+        const datosClase = [
+            {
+                teoria: "El producto de potencias de igual base es otra potencia con la misma base, y su exponente es la suma de los exponentes. Por ejemplo: 2⁵ · 2² = 2⁷.",
+                ejercicio: "¿Cuál es el resultado de 2⁵ · 2²?",
+                solucion: "2^7"
+            },
+            {
+                teoria: "El cociente de potencias de igual base es otra potencia con la misma base, y su exponente es la diferencia entre el exponente del dividendo y el del divisor.",
+                ejercicio: "Calculá el resultado de (-3)⁶ / (-3)⁷",
+                solucion: "(-3)^1"
+            },
+            {
+                teoria: "Toda potencia elevada al exponente 1 da como resultado la misma base. El exponente 1 no se suele escribir.",
+                ejercicio: "¿Cuánto da (9/5)¹ ?",
+                solucion: "9/5"
+            },
+            {
+                teoria: "Todo número elevado a la 0 da como resultado 1, exceptuando 0⁰ que es una indeterminación matemática.",
+                ejercicio: "¿Cuál es el resultado de (-5)⁰?",
+                solucion: "1"
+            },
+            {
+                teoria: "La potencia de otra potencia es otra potencia que tiene la misma base y cuyo exponente es el producto de los exponentes dados.",
+                ejercicio: "Resolvé aplicando la propiedad: (4²)⁴",
+                solucion: "4^8"
+            },
+            {
+                teoria: "La potenciación y radicación son distributivas con respecto a la multiplicación y la división. Sin embargo, ninguna de las operaciones es distributiva con respecto a la suma y a la resta.",
+                ejercicio: "Escribí el resultado distributivo de (2 · 3)³",
+                solucion: "2^3.3^3"
+            },
+            {
+                teoria: "La radicación es distributiva con respecto a la multiplicación. Ejemplo: √9 · 25 = √9 · √25.",
+                ejercicio: "Siguiendo el ejemplo, ¿cómo queda √9 · √25 en una sola raíz?",
+                solucion: "9·25"
+            },
+            {
+                teoria: "Las potencias con exponente negativo son iguales a la potencia de la fracción inversa de la base elevada al opuesto del exponente.",
+                ejercicio: "Aplicá la propiedad para 5⁻³",
+                solucion: "(1/5)^3"
+            },
+            {
+                teoria: "Las potencias con exponente racional son un radical donde el denominador de la fracción es el índice del radical y el numerador es el exponente del radicando.",
+                ejercicio: "Pasá a raíz el siguiente número: 25^(3/2)",
+                solucion: "√25^3"
+            },
+            {
+                teoria: "Es posible simplificar el índice de una raíz con el exponente del radicando. Si son impares: ³√2⁶ = 2².",
+                ejercicio: "Simplificá la siguiente raíz: ³√2⁶",
+                solucion: "2^2"
+            },
+            {
+                teoria: "La raíz de otra raíz da como resultado otra raíz cuyo índice es el producto de los índices anteriores.",
+                ejercicio: "Calculá el índice resultante de ³√√x",
+                solucion: "6^x"
+            }
+        ];
+
+        let pasoActual = 0;
+
+        function cargarPaso() {
+            if (pasoActual < datosClase.length) {
+                const item = datosClase[pasoActual];
+                document.getElementById("explicacion").innerText = item.teoria;
+                document.getElementById("enunciado").innerText = item.ejercicio;
+                document.getElementById("respuesta-usuario").value = "";
+                document.getElementById("mensaje-estado").innerText = "";
+            } else {
+                document.getElementById("bloque-ejercicio").innerHTML = "<h2>¡Terminaste todos los ejercicios de la clase!</h2>";
+            }
+        }
+
+        function comprobar() {
+            const entrada = document.getElementById("respuesta-usuario").value.trim().replace(/\s+/g, '');
+            const correcta = datosClase[pasoActual].solucion.replace(/\s+/g, '');
+
+            if (entrada === correcta) {
+                document.getElementById("mensaje-estado").innerText = "Correcto. Pasando al siguiente...";
+                pasoActual++;
+                setTimeout(cargarPaso, 1500);
+            } else {
+                document.getElementById("mensaje-estado").innerText = "Error: Respuesta incorrecta. Leé la explicación de arriba de nuevo.";
+            }
+        }
+
+        // Iniciar al abrir la página
+        cargarPaso();
+    </script>
+
+</body>
+</html>
